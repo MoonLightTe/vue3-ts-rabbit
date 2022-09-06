@@ -13,6 +13,8 @@ onMounted(async () => {
 </template>
 
 <style lang="less" scoped>
-@import '@/assets/styles/mixins.less';
-@import '@/assets/styles/variables.less';
+h1 {
+  background-color: @xtxColor;
+  .hoverShadow ();
+}
 </style>
