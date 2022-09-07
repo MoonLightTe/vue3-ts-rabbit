@@ -1,36 +1,19 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { onMounted } from 'vue';
+import useStore from '@/store';
+const { useHome } = useStore();
+onMounted(async ()=>{
+   await useHome().getAllCategory()
+  })
+</script>
 
 <template>
    <ul class="app-header-nav">
           <li class="home">
             <RouterLink to="/">首页</RouterLink>
           </li>
-          <li>
-            <a href="#">美食</a>
-          </li>
-          <li>
-            <a href="#">餐厨</a>
-          </li>
-          <li>
-            <a href="#">艺术</a>
-          </li>
-          <li>
-            <a href="#">电器</a>
-          </li>
-          <li>
-            <a href="#">居家</a>
-          </li>
-          <li>
-            <a href="#">洗护</a>
-          </li>
-          <li>
-            <a href="#">孕婴</a>
-          </li>
-          <li>
-            <a href="#">服装</a>
-          </li>
-          <li>
-            <a href="#">杂货</a>
+          <li v-for="item in useHome().categoryList" :key="item.id">
+            <a href="#">{{item.name}}</a>
           </li>
         </ul>
 </template>

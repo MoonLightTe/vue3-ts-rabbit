@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 import { getHomeCategory } from '@/api/home';
+import type { CategoryList } from '@/type/modules/home';
 
 const useHome = defineStore('home', {
   state: () => {
     return {
-      money: 1000,
+      categoryList:[] as CategoryList,
     };
   },
   getters: {},
@@ -12,7 +13,7 @@ const useHome = defineStore('home', {
    async getAllCategory(){
     const res = await getHomeCategory()
     console.log('res: ', res);
-    return res
+    this.categoryList=res.data.result
    }
   },
 });
