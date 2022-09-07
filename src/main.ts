@@ -5,5 +5,8 @@ import App from './App.vue';
 import 'normalize.css';
 // 标签样式初始化
 import '@/assets/styles/common.less';
+// 引入路由实例
+import router from '@/router'
 const app = createApp(App);
+app.use(router)
 app.mount('#app');
