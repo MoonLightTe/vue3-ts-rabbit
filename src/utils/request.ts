@@ -25,5 +25,12 @@ request.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+export const http = (method:string,url:string,submitData?:object)=>{
+  return request.request({
+    method,
+    url,
+    [method.toUpperCase() === 'GET' ? 'params' : 'data']:submitData
+  })
+}
 
 export default request;

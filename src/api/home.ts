@@ -1,7 +1,14 @@
 import request from "@/utils/request";
+import type state from '@/type/index'
 
-export const  getHomeCategory=()=>{
-    return request.get('/home/category/head')
+type Res<T> ={
+  code:string,
+  msg:string,
+  result:T
+}
+
+export const getHomeCategory=()=>{
+    return request.get<Res<state.CategoryList>>('/home/category/head')
 }
 
 
