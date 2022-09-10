@@ -10,7 +10,10 @@ import router from '@/router';
 // 引入pinia实例
 import { createPinia } from 'pinia';
 const pinia = createPinia();
+// 全局注册组件
+import XtxUI from '@/components/index'
 const app = createApp(App);
 app.use(router);
 app.use(pinia);
+app.use(XtxUI)
 app.mount('#app');
