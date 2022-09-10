@@ -23,5 +23,13 @@ export interface CategoryItem {
 	children: Children[];
 	goods: Good[];
 }
+export interface BannerItem {
+	id: string;
+	imgUrl: string;
+	hrefUrl: string;
+	type: string;
+}
+
 
 export type CategoryList = CategoryItem[]
+export type BannerList = BannerItem[]

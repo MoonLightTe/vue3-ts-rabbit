@@ -7,8 +7,14 @@ type Res<T> ={
   result:T
 }
 
+
 export const getHomeCategory=()=>{
     return request.get<Res<state.CategoryList>>('/home/category/head')
+}
+
+// 封装轮播图数据
+export const getBannerList=()=>{
+  return request.get<Res<state.BannerList>>('/home/banner')
 }
 
 

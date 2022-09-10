@@ -1,7 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useStore from '@/store';
+import { onMounted } from 'vue';
+onMounted(()=>{
+  useStore().useHome().getBannerList()
+})
+</script>
 
 <template>
-  <div class="home-banner">banner</div>
+  <div class="home-banner"> <XtxSlider :sliders="useStore().useHome().bannerList" auto-play /></div>
 </template>
 
 <style scoped lang="less">
