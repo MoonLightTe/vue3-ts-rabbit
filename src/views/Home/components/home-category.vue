@@ -9,7 +9,7 @@ onMounted(async () => {
   const { data } = await Home.getList();
   list.value = data.result;
 });
-computed(() => {
+ const list1=  computed(() => {
   if (list.value !== undefined)
     return list.value.map((item) => {
       return {
@@ -25,7 +25,7 @@ computed(() => {
 
 <template>
   <div class="home-category">
-    <ul class="menu">
+    <ul class="menu" v-if="list && list1!.length > 0">
       <li v-for="item in list" :key="item.id">
         <RouterLink to="/">{{ item.name }}</RouterLink>
         <template v-for="(value, index) in item.children">
@@ -57,6 +57,13 @@ computed(() => {
           </ul>
         </div>
       </li>
+    </ul>
+    <ul class="menu" v-else>
+        <li v-for="i in 9" :key="i">
+          <XtxSkeleton :width="40" :height="26" bg="rgba(255,255,255,.2)"/>
+          <XtxSkeleton :width="40" :height="26" style="margin: 0 10px" bg="rgba(255,255,255,.2)"/>
+          <XtxSkeleton :width="50" :height="26"  bg="rgba(255,255,255,.2)"/>
+        </li>
     </ul>
   </div>
 </template>
