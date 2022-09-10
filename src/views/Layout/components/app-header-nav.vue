@@ -12,9 +12,16 @@ onMounted(async () => {
     <li class="home">
       <RouterLink to="/">首页</RouterLink>
     </li>
-    <li v-for="item in useHome().categoryList" :key="item.id">
-      <a href="#">{{ item.name }}</a>
-    </li>
+    <template v-if="useHome().categoryList.length > 0">
+      <li v-for="item in useHome().categoryList" :key="item.id">
+        <a href="#">{{ item.name }}</a>
+      </li>
+    </template>
+    <template v-else>
+      <li v-for="i in 9" :key="i">
+        <XtxSkeleton :width="50" :height="20" style="margin: 8px 5px 0 0" bg="pink" />
+      </li>
+    </template>
   </ul>
 </template>
 
