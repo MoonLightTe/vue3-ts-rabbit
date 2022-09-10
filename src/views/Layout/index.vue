@@ -9,6 +9,7 @@ import AppHeaderSticky from './components/app-header-sticky.vue';
   <AppTopnav />
   <AppHeaderSticky />
   <AppHeader />
+  <RouterView />
   <AppFooter />
 </template>
 

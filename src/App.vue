@@ -1,11 +1,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 import request from './utils/request';
-onMounted(async () => {
-  const res = await request.get('/home/index');
-  console.log('res6: ', res);
-  console.log(1111);
-});
+
 </script>
 
 <template>
