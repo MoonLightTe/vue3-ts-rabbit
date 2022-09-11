@@ -14,7 +14,7 @@ onMounted(async () => {
     </li>
     <template v-if="useHome().categoryList.length > 0">
       <li v-for="item in useHome().categoryList" :key="item.id">
-        <a href="#">{{ item.name }}</a>
+        <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
       </li>
     </template>
     <template v-else>
