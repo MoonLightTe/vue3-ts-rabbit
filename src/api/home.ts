@@ -17,4 +17,9 @@ export const getBannerList=()=>{
   return request.get<Res<state.BannerList>>('/home/banner')
 }
 
+// 获取新鲜好物模块
+export const getNewsGoodsList=(params:any)=>{
+  return request.get<Res<any>>('/home/new', {params})
+}
+
 
