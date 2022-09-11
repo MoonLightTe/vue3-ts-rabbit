@@ -4,6 +4,7 @@ import type { CategoryList, BannerList,newGoodsList } from '@/type/modules/home'
 import { http } from '@/utils/request';
 
 const useHome = defineStore('home', {
+  persist:true,
   state: () => {
     return {
       categoryList: [] as CategoryList,

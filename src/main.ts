@@ -9,7 +9,10 @@ import '@/assets/styles/common.less';
 import router from '@/router';
 // 引入pinia实例
 import { createPinia } from 'pinia';
+// 数据持久化
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate)
 // 全局注册组件
 import XtxUI from '@/components/index'
 const app = createApp(App);
