@@ -1,6 +1,10 @@
 <script setup lang="ts">
   import HomePanel from './home-panel.vue'
   import useStore from '@/store';
+  // 1，封装接口
+  // 2.调用接口
+  // 3.声明数组类型
+  // 4.在组件中使用数据
   const home =useStore().useHome()
   home.getNewsGoodsList()
   </script>
