@@ -26,7 +26,8 @@ const changeCount=(newValue:number)=>{
   <Skeleton :height="30" :width="100" bg="pink"></Skeleton> -->
   <!-- <XtxButton type="primary" size="small"></XtxButton>
   <XtxSkeleton :height="30" :width="100" bg="pink"></XtxSkeleton> -->
-  <MyCount :model-value="num" @update:modelValue="changeCount"></MyCount>
+  <MyCount :model-value="num" @update:modelValue="changeCount" max="10" :isable="false"></MyCount>
+  <MyCount v-model="num" max="5"></MyCount>
 </template>
 
 <style lang="less" scoped>
