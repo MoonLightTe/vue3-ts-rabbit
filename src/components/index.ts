@@ -13,6 +13,8 @@ import Dialog from "./Dialog/index.vue";
 import InfiniteLoad from "./InfiniteLoad/index.vue";
 import Tabs from "./Tabs/index.vue";
 import TabPane from "./Tabs/pane.vue";
+import MyBottom from './MyBottom/index.vue'
+import MyCount from './MyCount/MyCount.vue'
 import type { App, Plugin } from "vue";
 
 const XtxUI: Plugin = {
@@ -32,6 +34,8 @@ const XtxUI: Plugin = {
     app.component(`XtxTabs`, Tabs);
     app.component(`XtxTabPane`, TabPane);
     app.component(`XtxInfiniteLoad`, InfiniteLoad);
+    app.component(`MyBottom`, MyBottom);
+    app.component(`MyCount`, MyCount);
   },
 };
 

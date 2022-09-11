@@ -13,16 +13,20 @@ useIntersectionObserver(target,([{isIntersecting}])=>{
     console.log('没有进入可视区');
   }
 })
+const num = ref<number>(1)
+const changeCount=(newValue:number)=>{
+  num.value=newValue
+}
 </script>
 
 <template>
-  <h1 class="height">
-    <div ref="target">你好vue3</div>
-  </h1>
+
+
   <!-- <Button type="primary" size="small">1111</Button>
   <Skeleton :height="30" :width="100" bg="pink"></Skeleton> -->
   <!-- <XtxButton type="primary" size="small"></XtxButton>
   <XtxSkeleton :height="30" :width="100" bg="pink"></XtxSkeleton> -->
+  <MyCount :model-value="num" @update:modelValue="changeCount"></MyCount>
 </template>
 
 <style lang="less" scoped>

@@ -102,7 +102,7 @@ onMounted(async () => {
           <div class="goods-aside"></div>
         </div>
       </div>
-      <div class="goods-info loading" v-else ></div>
+      <div v-else class="goods-info loading"  ></div>
     </div>
   </div>
 </template>
