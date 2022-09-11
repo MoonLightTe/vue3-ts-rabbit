@@ -1,16 +1,26 @@
 <script setup lang="ts">
   import HomePanel from './home-panel.vue'
   import useStore from '@/store';
+  import { ref } from 'vue';
+  // import { useIntersectionObserver } from '@vueuse/core';
+  import {useObserver} from '@/hooks'
   // 1，封装接口
   // 2.调用接口
   // 3.声明数组类型
   // 4.在组件中使用数据
   const home =useStore().useHome()
-  home.getNewsGoodsList()
+  // const target=ref(null)
+  // const {stop}=useIntersectionObserver(target,([{isIntersecting}])=>{
+  //   if(isIntersecting){
+  //
+  //     stop() //停止监听
+  //   }
+  // })
+ const {target} =useObserver(home.getNewsGoodsList)
   </script>
 
   <template>
-    <div class="home-new">
+    <div class="home-new" ref="target">
       <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
         <template #right><XtxMore path="/" /></template>
         <!-- 面板内容 -->
