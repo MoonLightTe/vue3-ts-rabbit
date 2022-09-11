@@ -19,7 +19,7 @@ export const getBannerList=()=>{
 
 // 获取新鲜好物模块
 export const getNewsGoodsList=(params:any)=>{
-  return request.get<Res<any>>('/home/new', {params})
+  return request.get<Res<state.newGoodsList>>('/home/new', {params})
 }
 
 

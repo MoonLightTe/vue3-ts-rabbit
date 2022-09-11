@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { getHomeCategory, getBannerList,getNewsGoodsList } from '@/api/home';
-import type { CategoryList, BannerList } from '@/type/modules/home';
+import type { CategoryList, BannerList,newGoodsList } from '@/type/modules/home';
 import { http } from '@/utils/request';
 
 const useHome = defineStore('home', {
@@ -8,7 +8,7 @@ const useHome = defineStore('home', {
     return {
       categoryList: [] as CategoryList,
       bannerList: [] as BannerList,
-      newGoodsList :[]
+      newGoodsList :[] as newGoodsList
     };
   },
   getters: {},
@@ -28,6 +28,7 @@ const useHome = defineStore('home', {
     },
     async getNewsGoodsList(){
       const res = await getNewsGoodsList({ limit:4 })
+      console.log('newres: ', res);
       this.newGoodsList=res.data.result
     }
   },

@@ -30,6 +30,16 @@ export interface BannerItem {
 	type: string;
 }
 
+export interface newGoodsItem {
+	id: string;
+	name: string;
+	desc: string;
+	price: string;
+	picture: string;
+	discount?: any;
+	orderNum: number;
+}
 
 export type CategoryList = CategoryItem[]
 export type BannerList = BannerItem[]
+export type newGoodsList = newGoodsItem[]

@@ -1,5 +1,8 @@
 <script setup lang="ts">
   import HomePanel from './home-panel.vue'
+  import useStore from '@/store';
+  const home =useStore().useHome()
+  home.getNewsGoodsList()
   </script>
 
   <template>
@@ -8,14 +11,14 @@
         <template #right><XtxMore path="/" /></template>
         <!-- 面板内容 -->
         <ul class="goods-list">
-          <li v-for="item in 4" :key="item">
+          <li v-for="item in home.newGoodsList" :key="item.id">
             <RouterLink to="/">
               <img
-                src="https://yanxuan-item.nosdn.127.net/e7337596de7161c57c27e8d8040231aa.jpg"
+                :src="item.picture"
                 alt=""
               />
-              <p class="name ellipsis">情侣款时尚户外轻型徒步鞋环保大底</p>
-              <p class="price">&yen;364.00</p>
+              <p class="name ellipsis">{{item.desc}}</p>
+              <p class="price">&yen;{{item.price}}</p>
             </RouterLink>
           </li>
         </ul>
