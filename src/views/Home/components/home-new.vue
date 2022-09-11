@@ -26,7 +26,8 @@
         <!-- 面板内容 -->
         <ul class="goods-list">
           <li v-for="item in home.newGoodsList" :key="item.id">
-            <RouterLink to="/">
+            <!-- <RouterLink to="/"> -->
+              <RouterLink :to="`/goods/${item.id}`">
               <img
                 :src="item.picture"
                 alt=""

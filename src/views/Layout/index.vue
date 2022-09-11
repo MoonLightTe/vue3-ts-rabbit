@@ -9,7 +9,7 @@ import AppHeaderSticky from './components/app-header-sticky.vue';
   <AppTopnav />
   <AppHeaderSticky />
   <AppHeader />
-  <RouterView />
+  <RouterView :key="$route.fullPath"/>
   <AppFooter />
 </template>
 
