@@ -3,14 +3,31 @@
 // import Button from '@/components/Button/index.vue'
 // import Skeleton from '@/components/Skeleton/Skeleton.vue';
 // import {XtxButton,XtxSkeleton} from '@/components/index'
+import {  useIntersectionObserver } from '@vueuse/core';
+import {  ref } from 'vue';
+const target=ref(null)
+useIntersectionObserver(target,([{isIntersecting}])=>{
+  if(isIntersecting){
+    console.log('进入了可视区');
+  }else{
+    console.log('没有进入可视区');
+  }
+})
 </script>
 
 <template>
-  <h1>Hello vue3 + ts👍</h1>
+  <h1 class="height">
+    <div ref="target">你好vue3</div>
+  </h1>
   <!-- <Button type="primary" size="small">1111</Button>
   <Skeleton :height="30" :width="100" bg="pink"></Skeleton> -->
-  <XtxButton type="primary" size="small"></XtxButton>
-  <XtxSkeleton :height="30" :width="100" bg="pink"></XtxSkeleton>
+  <!-- <XtxButton type="primary" size="small"></XtxButton>
+  <XtxSkeleton :height="30" :width="100" bg="pink"></XtxSkeleton> -->
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.height{
+  padding: 2000px 0;
+  height: 1000px;
+}
+</style>

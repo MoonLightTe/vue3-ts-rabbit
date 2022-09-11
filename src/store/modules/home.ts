@@ -19,7 +19,6 @@ const useHome = defineStore('home', {
     },
     async getList() {
       const res = await http<CategoryList>('get', '/home/category/head');
-      console.log('res: ', res);
       return res;
     },
     async getBannerList() {
@@ -28,7 +27,6 @@ const useHome = defineStore('home', {
     },
     async getNewsGoodsList(){
       const res = await getNewsGoodsList({ limit:4 })
-      console.log('newres: ', res);
       this.newGoodsList=res.data.result
     }
   },
