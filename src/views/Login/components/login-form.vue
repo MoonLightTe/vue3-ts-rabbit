@@ -8,7 +8,7 @@ const form = reactive({
   account: 'cdshi0001',
   password: '123456',
 });
-const { member} = useStore();
+const { member } = useStore();
 const LoginBtn = () => {
   if (!form.account) {
     message({ type: 'error', text: '用户名或手机号不能为空' });
@@ -26,6 +26,12 @@ const LoginBtn = () => {
   member.login(form);
   // message({ type: 'success', text: '可以登录了' });
 };
+// 回调地址是http://www.corho.com:8080/#/login/callback
+// 根据官方文档，把地址转义（转码）,使用encodeURIComponent
+const redirect_uri = encodeURIComponent(
+  'http://www.corho.com:8080/#/login/callback'
+);
+const uri = `https://graph.qq.com/oauth2.0/authorize?response_type=token&scope=all&client_id=100556005&redirect_uri=${redirect_uri}`;
 </script>
 
 <template>
@@ -65,10 +71,12 @@ const LoginBtn = () => {
       <a href="javascript:;" class="btn" @click="LoginBtn">登录</a>
     </div>
     <div class="action">
-      <img
-        src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
-        alt=""
-      />
+      <a :href="uri">
+        <img
+          src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
+          alt=""
+        />
+      </a>
       <div class="url">
         <a href="javascript:;">忘记密码</a>
         <a href="javascript:;">免费注册</a>
