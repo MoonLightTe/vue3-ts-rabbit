@@ -8,5 +8,5 @@ type Res<T> = {
 };
 
 export const login = (data: { account: string; password: string }) => {
-  return request.post<Res<any>>('/login', data);
+  return request.post<Res<state.Profile>>('/login', data);
 };
