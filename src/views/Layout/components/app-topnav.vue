@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 目的，登录去首页的时候将用户信息渲染到页面
 import useStore from '@/store';
-import { storeToRefs } from 'pinia'; // z这是为结构的数据还能保持响应式
+import { storeToRefs } from 'pinia'; // 这是为结构的数据还能保持响应式
 //
 const { member } = useStore();
 const { profile } = storeToRefs(member);
@@ -21,7 +21,8 @@ const { profile } = storeToRefs(member);
           <li><a href="javascript:;" @click="member.logout()">退出登录</a></li>
         </template>
         <template v-else>
-          <li><router-link to="/login">请先登录</router-link></li>
+          <!-- 为了让用户登录后回跳到当前浏览的页面 -->
+          <li><router-link :to="`/login?target=${$route.fullPath}`">请先登录</router-link></li>
           <li><a href="javascript:;">免费注册</a></li>
         </template>
         <li><a href="javascript:;">我的订单</a></li>

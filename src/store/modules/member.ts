@@ -26,8 +26,12 @@ const useMemberStore = defineStore('member', {
       this.profile=res.data.result
       // 调用message组件
       message({type:"success",text:"登录成功"})
+      console.log('router:11111 ', router.currentRoute.value);
+      const { target = "/" } = router.currentRoute.value.query;
+      // 跳转到指定地址
+      router.push(target as string);
       // 调用路由
-      router.push('/')
+      // router.push('/')
     },
     // 退出登录
     async logout(){
