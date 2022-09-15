@@ -18,7 +18,7 @@ const { profile } = storeToRefs(member);
               {{profile.nickname || profile.account || profile.mobile}}
             </a>
           </li>
-          <li><a href="javascript:;">退出登录</a></li>
+          <li><a href="javascript:;" @click="member.logout()">退出登录</a></li>
         </template>
         <template v-else>
           <li><router-link to="/login">请先登录</router-link></li>

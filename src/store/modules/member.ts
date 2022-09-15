@@ -20,6 +20,7 @@ const useMemberStore = defineStore('member', {
     }
   },
   actions: {
+    // 登录逻辑
     async login(data:{account:string,password:string}){
       const res = await login(data)
       this.profile=res.data.result
@@ -27,6 +28,15 @@ const useMemberStore = defineStore('member', {
       message({type:"success",text:"登录成功"})
       // 调用路由
       router.push('/')
+    },
+    // 退出登录
+    async logout(){
+      // 清除pPinia中的用户信息
+      this.profile={} as Profile;
+      // 2.提示用户
+      message({type:'success',text:'退出成功'})
+      //
+      router.push('/login')
     }
   },
 });
