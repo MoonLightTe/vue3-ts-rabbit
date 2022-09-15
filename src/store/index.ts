@@ -5,7 +5,7 @@ import useMemberStore from './modules/member';
 const useStore = () => {
   return {
     useHome,
-    useMemberStore,
+    member:useMemberStore(),
   };
 };
 

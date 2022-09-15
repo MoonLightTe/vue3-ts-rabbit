@@ -1,15 +1,29 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// 目的，登录去首页的时候将用户信息渲染到页面
+import useStore from '@/store';
+import { storeToRefs } from 'pinia'; // z这是为结构的数据还能保持响应式
+//
+const { member } = useStore();
+const { profile } = storeToRefs(member);
+</script>
 
 <template>
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <li>
-          <a href="javascript:;"><i class="iconfont icon-user"></i>黑马先锋</a>
-        </li>
-        <li><a href="javascript:;">退出登录</a></li>
-        <li><router-link to="/login">请先登录</router-link></li>
-        <li><a href="javascript:;">免费注册</a></li>
+        <template v-if="member.isLogin">
+          <li>
+            <a href="javascript:;">
+              <i class="iconfont icon-user"></i>
+              {{profile.nickname || profile.account || profile.mobile}}
+            </a>
+          </li>
+          <li><a href="javascript:;">退出登录</a></li>
+        </template>
+        <template v-else>
+          <li><router-link to="/login">请先登录</router-link></li>
+          <li><a href="javascript:;">免费注册</a></li>
+        </template>
         <li><a href="javascript:;">我的订单</a></li>
         <li><a href="javascript:;">会员中心</a></li>
         <li><a href="javascript:;">帮助中心</a></li>
