@@ -16,7 +16,7 @@ import TabPane from "./Tabs/pane.vue";
 import MyBottom from './MyBottom/index.vue'
 import MyCount from './MyCount/MyCount.vue'
 import type { App, Plugin } from "vue";
-
+export * from './Message'
 const XtxUI: Plugin = {
   install(app: App) {
     app.component(`XtxSkeleton`, Skeleton);
