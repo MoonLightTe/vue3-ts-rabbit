@@ -8,7 +8,7 @@ const form = reactive({
   account: 'cdshi0001',
   password: '123456',
 });
-const { useMemberStore } = useStore();
+const { member} = useStore();
 const LoginBtn = () => {
   if (!form.account) {
     message({ type: 'error', text: '用户名或手机号不能为空' });
@@ -23,8 +23,8 @@ const LoginBtn = () => {
     message({ type: 'error', text: '请同意许可' });
     return;
   }
-  useMemberStore().login(form);
-  message({ type: 'success', text: '可以登录了' });
+  member.login(form);
+  // message({ type: 'success', text: '可以登录了' });
 };
 </script>
 
