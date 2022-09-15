@@ -7,6 +7,8 @@ import { message } from '@/components';
 import router from '@/router/index'
 
 const useMemberStore = defineStore('member', {
+  // 开启数据持久化
+  persist:true,
   state: () => ({
     // 用户信息
     profile:{} as Profile
