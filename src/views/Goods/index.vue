@@ -88,8 +88,11 @@ onMounted(async () => {
               </div>
             </div>
             <!-- 规格选择组件 -->
+            <XtxSku :goods="goods"></XtxSku>
             <!-- 数量选择组件 -->
+            <MyCount></MyCount>
             <!-- 按钮组件 -->
+            <MyBottom style="marginTop:10px;" type="primary">加入购物车</MyBottom>
           </div>
         </div>
         <!-- 商品详情 -->
