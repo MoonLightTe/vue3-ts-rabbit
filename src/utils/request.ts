@@ -1,4 +1,6 @@
 import axios from 'axios';
+import useStore from '@/store';
+import { message } from '@/components';
 
 // 创建axios实例
 const request = axios.create({
@@ -9,6 +11,12 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   function (config) {
+    //设置请求拦截器
+    const {member} =useStore();
+    const {token} =member.profile;
+    if(token && config.headers){
+      config.headers.Authorization = `Bearer ${token}`
+    }
     return config;
   },
   function (error) {
@@ -22,6 +30,12 @@ request.interceptors.response.use(
     return response;
   },
   function (error) {
+    if(error.code === 'ERR_NETWORK'){
+      // 无网络，错误提示
+      message({type:'error',text:"亲，换个网络试试~"})
+    }else{
+      message({type:'error',text:error.response.data.message})
+    }
     return Promise.reject(error);
   }
 );
