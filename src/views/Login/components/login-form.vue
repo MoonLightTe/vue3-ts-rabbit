@@ -3,6 +3,7 @@
 import { reactive, ref } from 'vue';
 import { message } from '@/components';
 import useStore from '@/store';
+import { useRoute } from 'vue-router';
 const isCheck = ref(false);
 const form = reactive({
   account: 'cdshi0001',
@@ -28,8 +29,14 @@ const LoginBtn = () => {
 };
 // 回调地址是http://www.corho.com:8080/#/login/callback
 // 根据官方文档，把地址转义（转码）,使用encodeURIComponent
+// const redirect_uri = encodeURIComponent(
+//   'http://www.corho.com:8080/#/login/callback'
+// );
+const route = useRoute();
+const { target = '/' } = route.query;
+// const redirect_uri = ;
 const redirect_uri = encodeURIComponent(
-  'http://www.corho.com:8080/#/login/callback'
+  `http://www.corho.com:8080/#/login/callback?target=${target}`
 );
 const uri = `https://graph.qq.com/oauth2.0/authorize?response_type=token&scope=all&client_id=100556005&redirect_uri=${redirect_uri}`;
 </script>

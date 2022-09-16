@@ -46,6 +46,8 @@ const useMemberStore = defineStore('member', {
     async loginSocialBind(data:{unionId:string,mobile:string,code:string}){
       const res = await loginSocialBind(data)
       console.log('res48: ', res);
+      this.profile = res.data.result;
+      this.loginSuccess()
     },
     //发送验证码
     async sendCode(data:{mobile:string}){

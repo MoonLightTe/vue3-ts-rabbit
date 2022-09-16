@@ -12,3 +12,6 @@ export interface Profile {
   provinceCode: string;
   profession: string;
 }
+
+// 获取短信验证码的
+export type MobileCodeType= 'register' | 'login'
