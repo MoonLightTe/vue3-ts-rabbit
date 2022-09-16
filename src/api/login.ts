@@ -26,3 +26,8 @@ export const sendCode = (params: { mobile: string }) => {
     params
   });
 };
+
+// 如果已经绑定了手机号码，并且已经注册了
+export const  loginQQUnionID=(data:{unionId:string,source:number})=>{
+    return request.post<Res<state.Profile>>('/login/social',data)
+}

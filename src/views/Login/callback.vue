@@ -5,17 +5,20 @@ import LoginHeader from './components/login-header.vue';
 import LoginFooter from './components/login-footer.vue';
 import { ref } from 'vue';
 import type { QQUserInfo } from '@/type';
-//引入 hooks
-import {userCount} from '@/hooks'
+import useStore from '@/store';
+
 
 // 声明一个可以接收用户信息的变量
 const userInfo= ref<QQUserInfo>()
+const {member}=useStore()
   const unionId = ref('')
 // 1. 检查用户是否已登录
 if (QC.Login.check()) {
   // 2. 获取 QQ 用户唯一标识 openId
   QC.Login.getMe((openId) => {
     console.log('🗝️openId', openId);
+    // 获取openid之后尝试直接登录
+    member.loginQQUnionId({ unionId: openId, source: 6 });
     unionId.value=openId
   });
   // 3. 获取用户资料

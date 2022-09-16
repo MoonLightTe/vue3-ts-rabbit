@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { login,loginSocialBind,sendCode } from '@/api/login';
+import { login,loginSocialBind,sendCode,loginQQUnionID } from '@/api/login';
 // 引人类型声明
 import type { Profile } from '@/type/modules/member';
 import { message } from '@/components';
@@ -45,13 +45,31 @@ const useMemberStore = defineStore('member', {
     // 三方登录——账号绑定
     async loginSocialBind(data:{unionId:string,mobile:string,code:string}){
       const res = await loginSocialBind(data)
-      console.log('res: ', res);
+      console.log('res48: ', res);
     },
     //发送验证码
     async sendCode(data:{mobile:string}){
       const res = await sendCode(data)
-      console.log(' res: ',  res);
+      console.log(' res53: ',  res);
+    },
+    //QQ直接登录
+  async loginQQUnionId(data:{unionId:string,source:number}){
+      const res =await loginQQUnionID(data)
+      console.log('res58: ', res);
+      this.profile=res.data.result
+      this.loginSuccess()
+    },
+  // 封装一个登录的接口
+  loginSuccess(){
+    if(this.isLogin){
+         // 调用message组件
+         message({type:"success",text:"登录成功"})
+         console.log('router:11111 ', router.currentRoute.value);
+         const { target = "/" } = router.currentRoute.value.query;
+         // 跳转到指定地址
+         router.push(target as string);
     }
+  }
   },
 });
 
