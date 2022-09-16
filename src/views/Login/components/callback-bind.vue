@@ -4,12 +4,15 @@ import useStore from '@/store';
 import type { QQUserInfo } from '@/type';
 import { reactive,ref } from 'vue';
 import { message } from '@/components';
+//引入 hooks
+import {userCount} from '@/hooks'
+// import { useCounter } from '@vueuse/shared';
 const props= defineProps<{
   userInfo: QQUserInfo,
   unionId:string
 }>()
 const { member } = useStore();
-
+const {count , start } =userCount()
 // keepAlive 会把 form 的数据保留下来const props=
 const form = reactive({
   mobile: '15915876393',
@@ -21,7 +24,11 @@ const isMobile=()=>{
 }
 const sendCode=()=>{
   if(isMobile()){
-    member.sendCode({mobile:form.mobile})
+    if(count.value === 0){
+      member.sendCode({mobile:form.mobile})
+      message({ type: 'success', text: '验证码发送成功~' });
+      start(60)
+    }
   }else{
     message({type:'error',text:'手机号验证不通过'})
   }
@@ -68,7 +75,7 @@ const loginSocialBind = () => {
       <div class="field">
         <i class="icon iconfont icon-code"></i>
         <input class="input" type="text" placeholder="短信验证码" v-model="form.code" />
-        <span class="code" @click="sendCode">发送验证码</span>
+        <span class="code" @click="sendCode">{{count === 0? '发送验证码':count}}</span>
       </div>
       <div class="error"></div>
     </div>

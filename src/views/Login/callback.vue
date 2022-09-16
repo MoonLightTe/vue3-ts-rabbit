@@ -5,7 +5,9 @@ import LoginHeader from './components/login-header.vue';
 import LoginFooter from './components/login-footer.vue';
 import { ref } from 'vue';
 import type { QQUserInfo } from '@/type';
-//
+//引入 hooks
+import {userCount} from '@/hooks'
+
 // 声明一个可以接收用户信息的变量
 const userInfo= ref<QQUserInfo>()
   const unionId = ref('')
