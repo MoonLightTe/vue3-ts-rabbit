@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { login } from '@/api/login';
+import { login,loginSocialBind,sendCode } from '@/api/login';
 // 引人类型声明
 import type { Profile } from '@/type/modules/member';
 import { message } from '@/components';
@@ -41,6 +41,16 @@ const useMemberStore = defineStore('member', {
       message({type:'success',text:'退出成功'})
       //
       router.push('/login')
+    },
+    // 三方登录——账号绑定
+    async loginSocialBind(data:{unionId:string,mobile:string,code:string}){
+      const res = await loginSocialBind(data)
+      console.log('res: ', res);
+    },
+    //发送验证码
+    async sendCode(data:{mobile:string}){
+      const res = await sendCode(data)
+      console.log(' res: ',  res);
     }
   },
 });

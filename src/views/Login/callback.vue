@@ -4,16 +4,22 @@ import CallbackRegister from './components/callback-register.vue';
 import LoginHeader from './components/login-header.vue';
 import LoginFooter from './components/login-footer.vue';
 import { ref } from 'vue';
+import type { QQUserInfo } from '@/type';
 //
+// 声明一个可以接收用户信息的变量
+const userInfo= ref<QQUserInfo>()
+  const unionId = ref('')
 // 1. 检查用户是否已登录
 if (QC.Login.check()) {
   // 2. 获取 QQ 用户唯一标识 openId
   QC.Login.getMe((openId) => {
     console.log('🗝️openId', openId);
+    unionId.value=openId
   });
   // 3. 获取用户资料
-  QC.api('get_user_info').success((res: unknown) => {
+  QC.api('get_user_info').success((res: QQUserInfo) => {
     console.log('😀获取用户资料', res);
+    userInfo.value=res
   });
 }
 const isBind = ref(true);
@@ -41,8 +47,9 @@ const isBind = ref(true);
     </nav>
     <div class="tab-content">
       <keep-alive>
-        <component :is="isBind ? CallbackBind:CallbackRegister" />
+        <component :is="isBind ? CallbackBind:CallbackRegister" :userInfo="userInfo" :unionId="unionId" />
       </keep-alive>
+      <!-- 将用户信息传递给组件渲染出来 -->
     <!-- 1.绑定组件 -->
       <!-- <CallbackBind></CallbackBind> -->
       <!-- 2.注册组件 -->
