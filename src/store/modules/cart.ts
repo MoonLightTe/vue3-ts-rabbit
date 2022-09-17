@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { addCart, getCartList } from '@/api/cart';
+import { addCart, getCartList,deleteCart } from '@/api/cart';
 import type { AddGoods, CartList } from '@/type/index';
 
 const userCartStore = defineStore('cart', {
@@ -40,6 +40,11 @@ const userCartStore = defineStore('cart', {
       console.log('购物车列表 : ', res);
       this.cartList = res.data.result;
     },
+   async delCart(data:{ids:string[]}){
+    const res = await deleteCart(data)
+    console.log('删除购物车列表 ', res);
+    this.getCartList();
+    }
   },
 });
 

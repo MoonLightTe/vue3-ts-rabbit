@@ -3,16 +3,19 @@
   const {cart} =useStore();
   // 获取购物车列表
   cart.getCartList()
+  const del= (skuId:string)=>{
+    cart.delCart({ids:[skuId]})
+  }
   </script>
 
   <template>
     <div class="cart">
       <a class="curr" href="javascript:;">
-        <i class="iconfont icon-cart"></i><em>{{cart.}}</em>
+        <i class="iconfont icon-cart"></i><em>{{cart.effectiveListCount}}</em>
       </a>
       <div class="layer">
         <div class="list">
-          <div class="item" v-for="item in cart.cartList" :key="item.skuId">
+          <div class="item" v-for="item in cart.effectiveList" :key="item.skuId">
             <RouterLink :to="`/goods/${item.id}`">
               <img
                 :src="item.picture"
@@ -29,13 +32,13 @@
                 <p class="count">x{{item.count}}</p>
               </div>
             </RouterLink>
-            <i class="iconfont icon-close-new"></i>
+            <i class="iconfont icon-close-new" @click="del(item.skuId)"></i>
           </div>
         </div>
         <div class="foot">
           <div class="total">
-            <p>共 3 件商品</p>
-            <p>&yen;135.00</p>
+            <p>共{{cart.effectiveListCount}} 件商品</p>
+            <p>&yen;{{cart.effectiveListPrice}}</p>
           </div>
           <XtxButton type="plain">去购物车结算</XtxButton>
         </div>

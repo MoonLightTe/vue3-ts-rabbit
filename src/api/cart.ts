@@ -18,3 +18,14 @@ export const addCart = (data:AddGoods)=>{
 export const getCartList=()=>{
   return request.get<Res<CartList>>('/member/cart')
 }
+
+/**
+ * 删除购物车信息
+ * @param data SKUID 集合
+ *
+ */
+export const deleteCart=(data:{ids:string[]})=>{
+  return request.delete('/member/cart',{
+    data
+  })
+}
