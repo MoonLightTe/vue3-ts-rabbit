@@ -24,6 +24,7 @@ const router = createRouter({
     { path: '/login', component: () => import('@/views/Login/index.vue') },
     { path: '/login/callback', component: () => import('@/views/Login/callback.vue') },
     { path: '/test', component: () => import('@/test.vue') },
+    { path: '/cart', component: () => import('@/views/Cart/index.vue') },
   ],
   scrollBehavior: () => {
     return { top: 0 };
