@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { RouterLink } from "vue-router";
   import AppHeaderNav from "./app-header-nav.vue";
+  import  AppHeaderCart from './app-header-cart.vue'
   </script>
 
   <template>
@@ -16,10 +17,11 @@
         </div>
         <!-- 购物车 -->
         <div class="cart">
-          <a class="curr" href="#">
+          <!-- <a class="curr" href="#">
             <i class="iconfont icon-cart"></i>
             <em>2</em>
-          </a>
+          </a> -->
+          <AppHeaderCart />
         </div>
       </div>
     </header>
@@ -43,7 +45,7 @@
           contain;
       }
     }
-    
+
     .search {
       width: 170px;
       height: 32px;
