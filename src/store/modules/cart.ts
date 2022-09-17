@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
 import { addCart,getCartList } from '@/api/cart';
-import type { AddGoods } from '@/type/index';
+import type { AddGoods,CartList } from '@/type/index';
 
 const userCartStore = defineStore('cart', {
   // 状态
   state: () => ({
     // 购物车列表
-    cartList: [],
+    cartList: [] as CartList ,
   }),
   // 计算
   getters: {},
@@ -16,6 +16,7 @@ const userCartStore = defineStore('cart', {
     async addCart(data: AddGoods) {
       const res = await addCart(data);
       console.log(' res: ', res);
+      this.getCartList()
     },
     /**
      *  pinia中获取购物车列表
@@ -23,6 +24,7 @@ const userCartStore = defineStore('cart', {
    async getCartList(){
       const res = await getCartList()
       console.log('购物车列表 : ', res );
+      this.cartList=res.data.result
     }
   },
 });
