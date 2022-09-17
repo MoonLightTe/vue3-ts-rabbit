@@ -6,7 +6,8 @@ type Res<T> = {
   result: T;
 };
 // 获取商品详情
-
 export const getGoodsDetaile=(params:{id:string |string[]})=>{
   return request.get<Res<state.Goods>>('/goods',{params})
 }
+
+
