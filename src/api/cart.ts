@@ -29,3 +29,13 @@ export const deleteCart=(data:{ids:string[]})=>{
     data
   })
 }
+/**
+ * 更新表单的状态
+ * @params id 商品的skuid
+ * @params data 可选的更改数据
+ *
+ */
+export const updateCart =(id:string,data?:{selected?:boolean,count?:number})=>{
+  return request.put<Res<any>>(`/member/cart/${id}`,data)
+}
+
