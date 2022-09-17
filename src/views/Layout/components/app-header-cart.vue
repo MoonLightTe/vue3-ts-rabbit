@@ -13,7 +13,7 @@
       <a class="curr" href="javascript:;">
         <i class="iconfont icon-cart"></i><em>{{cart.effectiveListCount}}</em>
       </a>
-      <div class="layer">
+      <div class="layer" v-if="cart.effectiveList.length > 0">
         <div class="list">
           <div class="item" v-for="item in cart.effectiveList" :key="item.skuId">
             <RouterLink :to="`/goods/${item.id}`">
