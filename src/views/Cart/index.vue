@@ -1,6 +1,7 @@
 <script setup lang="ts">
 //渲染有效商品价格
 import useStore from '@/store';
+// 使用cart的pinia的全局状态管理工具
 const { cart } = useStore();
 
 </script>
@@ -27,7 +28,7 @@ const { cart } = useStore();
           <!-- 有效商品 -->
           <tbody>
             <tr v-for="item in cart.effectiveList" :key="item.skuId">
-              <td><XtxCheckBox :model-value="true" /></td>
+              <td><XtxCheckBox :model-value="item.selected" v-on:update:model-value="(newVal)=>cart.updateCart(item.skuId,{selected:newVal})" /></td>
               <td>
                 <div class="goods">
                   <RouterLink :to="`/goods/${item.id}`">
@@ -48,7 +49,7 @@ const { cart } = useStore();
                 <p>&yen;{{item.nowPrice}}</p>
               </td>
               <td class="tc">
-                <XtxCount :model-value="item.count" :max="item.stock" />
+                <XtxCount :model-value="item.count" :max="item.stock" @update:model-value="(newVal)=>cart.updateCart(item.skuId,{count:newVal})" />
               </td>
               <td class="tc"><p class="f16 red">&yen;{{(Number(item.nowPrice) * item.count).toFixed(2)}}</p></td>
               <td class="tc">

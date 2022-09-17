@@ -21,7 +21,7 @@ export const getCartList=()=>{
 
 /**
  * 删除购物车信息
- * @param data SKUID 集合
+ * @param data SKUID的数组 必须传一个数组
  *
  */
 export const deleteCart=(data:{ids:string[]})=>{
