@@ -8,7 +8,7 @@
   <template>
     <div class="cart">
       <a class="curr" href="javascript:;">
-        <i class="iconfont icon-cart"></i><em>4</em>
+        <i class="iconfont icon-cart"></i><em>{{cart.}}</em>
       </a>
       <div class="layer">
         <div class="list">
