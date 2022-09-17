@@ -15,7 +15,7 @@
             @click="clickSpecs(item, val)"
             v-else
             >{{ val.name }}</span
-          >
+          > 
         </template>
       </dd>
     </dl>

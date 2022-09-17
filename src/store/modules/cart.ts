@@ -1,17 +1,22 @@
-import { def } from "@vue/shared";
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
+import { addCart } from '@/api/cart';
+import type { AddGoods } from '@/type/index';
 
-const userCartStore =defineStore('cart',{
+const userCartStore = defineStore('cart', {
   // 状态
-  state:()=>({
+  state: () => ({
     // 购物车列表
-    cartList:[],
+    cartList: [],
   }),
   // 计算
-  getters:{},
+  getters: {},
   // 方法
-  actions:{}
-})
+  actions: {
+    async addCart(data: AddGoods) {
+      const res = await addCart(data);
+      console.log(' res: ', res);
+    },
+  },
+});
 
 export default userCartStore;
-

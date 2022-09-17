@@ -108,3 +108,11 @@ export interface Goods {
 	evaluationInfo?: any;
 }
 
+export interface SkuEmit {
+  skuId: string;
+  price: string;
+  oldPrice: string;
+  inventory: number;
+  specsText: string;
+}
+

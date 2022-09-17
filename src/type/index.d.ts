@@ -4,4 +4,4 @@ export * from './modules/home'
 export * from "./modules/goods";
 export * from './modules/member';
 export  * from './modules/qq'  //将这个文件里的所有变量都导出
-
+export * from './modules/cart'

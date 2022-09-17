@@ -5,7 +5,7 @@
 //   3. 减号和最小值处理
 //   4. props 默认值处理
 const { modelValue=1,min=1,max=99,isable=true } = defineProps<{
-  modelValue?: number;
+  modelValue: number;
   max?: number;
   min?: number;
   isable?: boolean;

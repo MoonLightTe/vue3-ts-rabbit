@@ -2,19 +2,39 @@
 import { useRoute } from 'vue-router';
 import { getGoodsDetaile } from '@/api/goods';
 import { onMounted, ref } from 'vue';
-import type { Goods } from '@/type';
+import type { Goods, SkuEmit } from '@/type';
+import useStore from '@/store';
+import { message } from '@/components';
 const route = useRoute();
 const { id } = route.params;
 const goods = ref<Goods>();
-console.log('route.params;: ', route.params);
-console.log('goodsId: ', id);
 onMounted(async () => {
   const res = await getGoodsDetaile({ id });
   if(res.data.result !== undefined){
     goods.value = res.data.result;
   }
-  // console.log('res: ', res);
 });
+const count =ref(1)
+// 改变商品规格的事件
+const skuId=ref('')
+const change= (value:SkuEmit)=>{
+  skuId.value =value.skuId || ''
+  console.log(value)
+}
+// 点击按钮添加到购物车
+const {cart} = useStore();
+const add=()=>{
+  console.log('1');
+  if(!skuId.value){
+    message({type:"error",text:"请选择完成商品规则"})
+  }
+  // 调用加入的购物车接口
+  cart.addCart({
+    skuId:skuId.value,
+    count:count.value
+  })
+}
+
 </script>
 
 <template>
@@ -88,11 +108,11 @@ onMounted(async () => {
               </div>
             </div>
             <!-- 规格选择组件 -->
-            <XtxSku :goods="goods"></XtxSku>
+            <XtxSku :goods="goods" @change="change"></XtxSku>
             <!-- 数量选择组件 -->
-            <MyCount></MyCount>
+            <MyCount v-model="count"></MyCount>
             <!-- 按钮组件 -->
-            <MyBottom style="marginTop:10px;" type="primary">加入购物车</MyBottom>
+            <MyBottom style="marginTop:10px;" type="primary" @click="add">加入购物车</MyBottom>
           </div>
         </div>
         <!-- 商品详情 -->
@@ -105,7 +125,7 @@ onMounted(async () => {
           <div class="goods-aside"></div>
         </div>
       </div>
-      <div v-else class="goods-info loading"  ></div>
+      <div v-else class="goods-info loading"></div>
     </div>
   </div>
 </template>
@@ -116,7 +136,7 @@ onMounted(async () => {
   margin-top: 20px;
 }
 .loading {
-  background: #fff url(@/assets/images/loading.gif) no-repeat center;
+  background: #fff url('@/assets/images/loading.gif') no-repeat center;
 }
 // 商品信息
 .goods-info {
