@@ -145,12 +145,12 @@ const userCartStore = defineStore('cart', {
      */
     async changeAllCheckState(data: { selected: boolean; ids?: string[] }) {
       if (this.isLogin) {
-        const res = await AllCheck(data);
-        console.log('全选状态:', res);
+       await AllCheck(data);
         message({ type: 'success', text: '操作成功' });
         this.getCartList();
       } else {
-        message({ type: 'error', text: '功能还在开发中~' });
+        this.cartList.forEach(item=>item.selected = data.selected)
+        message({ type: 'success', text: '操作成功' });
       }
     },
     /**
