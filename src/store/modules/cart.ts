@@ -39,6 +39,25 @@ const userCartStore = defineStore('cart', {
     isLogin():boolean{
       const {member} =useStore()
       return member.isLogin;
+    },
+    /**
+     * 已选中的列表
+     *
+     */
+    selectedList():CartList{
+      return this.effectiveList.filter(item=>item.selected)
+    },
+    /**
+     * 已选择的商品总数
+     */
+    selectedListCount():number{
+      return this.selectedList.reduce((sum,item)=>sum+item.count,0)
+    },
+    /**
+     * 已选择的列表总价
+     */
+    selectedListPrice():string{
+      return this.selectedList.reduce((sum,item)=>sum + item.count*Number(item.nowPrice),0).toFixed(2)
     }
 
   },
