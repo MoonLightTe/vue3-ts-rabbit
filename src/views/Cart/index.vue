@@ -1,8 +1,22 @@
 <script setup lang="ts">
 //渲染有效商品价格
+import { message } from '@/components';
 import useStore from '@/store';
+import { useRouter } from 'vue-router';
 // 使用cart的pinia的全局状态管理工具
 const { cart } = useStore();
+const router = useRouter()
+const goCheckout=()=>{
+  // 判断是否选中商品
+  if(cart.selectedListCount === 0){
+  return message({text:"请选择商品下单"})
+  }
+  // 判断是否登录
+  if(!cart.isLogin){
+    return message({text:'请先登录'})
+  }
+  router.push('/member/checkout')
+}
 
 </script>
 
@@ -67,7 +81,7 @@ const { cart } = useStore();
         <div class="total">
           共 {{cart.effectiveListCount}} 件有效商品，已选择 {{cart.selectedListCount}} 件，商品合计：
           <span class="red">¥{{cart.selectedListPrice}}</span>
-          <XtxButton type="primary">下单结算</XtxButton>
+          <XtxButton type="primary" @click="goCheckout()">下单结算</XtxButton>
         </div>
       </div>
     </div>

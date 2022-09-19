@@ -2,12 +2,14 @@
 import useHome from './modules/home';
 import useMemberStore from './modules/member';
 import userCartStore from './modules/cart';
+import useCheckoutStore from './modules/checkout'
 
 const useStore = () => {
   return {
     useHome,
     member:useMemberStore(),
-    cart:userCartStore()
+    cart:userCartStore(),
+    checkout:useCheckoutStore()
   };
 };
 
