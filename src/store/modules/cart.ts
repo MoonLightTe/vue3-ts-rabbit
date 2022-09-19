@@ -77,8 +77,8 @@ const userCartStore = defineStore('cart', {
      */
     async changeAllCheckState(data:{selected:boolean,ids?:string[]}){
       if(this.isLogin){
-        const res = AllCheck(data)
-        console.log('res: ', res);
+        const res = await AllCheck(data)
+        console.log('全选状态:', res);
         message({type:'success',text:'操作成功'})
         this.getCartList()
       }else{
