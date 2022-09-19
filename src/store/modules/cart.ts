@@ -11,6 +11,8 @@ import useStore from '..';
 import { message } from '@/components';
 
 const userCartStore = defineStore('cart', {
+  // 开启本地数据持久化
+  persist:true,
   // 状态
   state: () => ({
     // 购物车列表
@@ -131,10 +133,7 @@ const userCartStore = defineStore('cart', {
         if(data?.count){
           cartItem.count=data.count
         }
-
         if(data?.selected !== undefined){
-          console.log('data?.selected: ', data?.selected);
-          console.log('222',cartItem);
           cartItem.selected=data.selected
         }
 
