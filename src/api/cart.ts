@@ -39,3 +39,12 @@ export const updateCart =(id:string,data?:{selected?:boolean,count?:number})=>{
   return request.put<Res<any>>(`/member/cart/${id}`,data)
 }
 
+/**
+ * 封装全选和反选的接口
+ * @params selected 是否选中
+ * @params ids skuId即商品id的合集
+ *
+ */
+export const AllCheck=(data:{selected:boolean,ids?:string[]})=>{
+  return request.put('/member/cart/selected',data)
+}

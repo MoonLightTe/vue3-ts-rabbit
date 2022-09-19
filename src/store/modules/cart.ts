@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
-import { addCart, getCartList,deleteCart,updateCart } from '@/api/cart';
+import { addCart, getCartList,deleteCart,updateCart,AllCheck } from '@/api/cart';
 import type { AddGoods, CartList } from '@/type/index';
+import useStore from '..';
+import { message } from '@/components';
 
 const userCartStore = defineStore('cart', {
   // 状态
@@ -23,7 +25,22 @@ const userCartStore = defineStore('cart', {
     // 有效商品的总价格
     effectiveListPrice():number{
       return this.effectiveList.reduce((sum,item)=>sum + Number(item.nowPrice)*item.count,0)
+    },
+    /**
+     * 计算全选按钮的状态
+     *
+     */
+    isAllCheck():boolean{
+      return  this.effectiveList.length > 0 && this.effectiveList.every(item=>item.selected)
+    },
+    /**
+     * 是否登录
+     */
+    isLogin():boolean{
+      const {member} =useStore()
+      return member.isLogin;
     }
+
   },
   // 方法
   actions: {
@@ -54,6 +71,19 @@ const userCartStore = defineStore('cart', {
       console.log('res : ', res );
       // 获取最新的购物车列表
       this.getCartList()
+    },
+    /**
+     *更改全选按钮的状态
+     */
+    async changeAllCheckState(data:{selected:boolean,ids?:string[]}){
+      if(this.isLogin){
+        const res = AllCheck(data)
+        console.log('res: ', res);
+        message({type:'success',text:'操作成功'})
+        this.getCartList()
+      }else{
+        message({type:'error',text:'功能还在开发中~'})
+      }
     }
   },
 });

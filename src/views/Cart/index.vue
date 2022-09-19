@@ -17,7 +17,7 @@ const { cart } = useStore();
         <table>
           <thead>
             <tr>
-              <th width="120"><XtxCheckBox>全选</XtxCheckBox></th>
+              <th width="120"><XtxCheckBox :model-value="cart.isAllCheck" @update:model-value="(val)=>cart.changeAllCheckState({selected:val})">全选</XtxCheckBox></th>
               <th width="400">商品信息</th>
               <th width="220">单价</th>
               <th width="180">数量</th>
