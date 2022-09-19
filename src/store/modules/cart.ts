@@ -6,6 +6,7 @@ import {
   updateCart,
   AllCheck,
   queryGoodsInfo,
+mergeLocalCarts,
 } from '@/api/cart';
 import type { AddGoods, CartList,CartItem } from '@/type/index';
 import useStore from '..';
@@ -162,6 +163,19 @@ const userCartStore = defineStore('cart', {
         this.cartList.forEach(item=>item.selected = data.selected)
         message({ type: 'success', text: '操作成功' });
       }
+    },
+    /**
+     * 合并数组
+     */
+    async mergeLocalCart(){
+      const data =this.cartList.map(({skuId,selected,count})=>({
+        skuId,
+        selected,
+        count
+      }))
+      const res = mergeLocalCarts(data)
+      console.log('合并数组: ', res);
+      this.getCartList()
     },
     /**
      * 退出登录，清空购物车

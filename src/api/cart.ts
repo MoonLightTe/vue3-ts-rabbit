@@ -1,6 +1,6 @@
 //添加商品
 import request from '@/utils/request'
-import type { AddGoods,CartItem,CartList } from '@/type'
+import type { AddGoods,CartItem,CartList,mergeItem } from '@/type'
 type Res<T> = {
   code: string;
   msg: string;
@@ -55,4 +55,12 @@ export const AllCheck=(data:{selected:boolean,ids?:string[]})=>{
 export const queryGoodsInfo=(id:string)=>{
   return request.get<Res<CartItem>>(`/goods/stock/${id}`)
 }
+
+/**
+ * 合并本地的购物车
+ */
+export const mergeLocalCarts=(data:mergeItem[])=>{
+  return request.post('/member/cart/merge',data)
+}
+
 

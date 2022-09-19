@@ -22,4 +22,10 @@ export interface CartItem {
 	postFee: number;
 }
 
+export interface mergeItem{
+  skuId:string,
+  selected:boolean,
+  count:number
+}
+
 export type CartList = CartItem[]
