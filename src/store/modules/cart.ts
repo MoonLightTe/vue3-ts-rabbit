@@ -5,6 +5,7 @@ import {
   deleteCart,
   updateCart,
   AllCheck,
+  queryGoodsInfo,
 } from '@/api/cart';
 import type { AddGoods, CartList,CartItem } from '@/type/index';
 import useStore from '..';
@@ -85,6 +86,15 @@ const userCartStore = defineStore('cart', {
         this.getCartList();
       } else {
         // 未登录状态，操作本地数据
+        this.cartList.forEach(async(item)=>{
+          const {data:{result}}= await queryGoodsInfo(item.skuId)
+          // 更新商品现价
+            item.nowPrice = result.nowPrice
+            // 更新商品库存
+            item.stock=result.stock
+            // 更新商品是否有效
+            item.isEffective=result.isEffective
+        })
         // 购物车是否有本地数据
         const cartItem= this.cartList.find(item=>item.skuId===data.skuId)
         if(cartItem){

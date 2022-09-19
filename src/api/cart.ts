@@ -1,6 +1,6 @@
 //添加商品
 import request from '@/utils/request'
-import type { AddGoods,CartList } from '@/type'
+import type { AddGoods,CartItem,CartList } from '@/type'
 type Res<T> = {
   code: string;
   msg: string;
@@ -48,3 +48,11 @@ export const updateCart =(id:string,data?:{selected?:boolean,count?:number})=>{
 export const AllCheck=(data:{selected:boolean,ids?:string[]})=>{
   return request.put('/member/cart/selected',data)
 }
+
+/**
+ * 查询商品库存的价格信息
+ */
+export const queryGoodsInfo=(id:string)=>{
+  return request.get<Res<CartItem>>(`/goods/stock/${id}`)
+}
+
