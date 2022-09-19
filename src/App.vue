@@ -9,8 +9,8 @@ import request from './utils/request';
 </template>
 
 <style lang="less" scoped>
-h1 {
-  background-color: @xtxColor;
-  .hoverShadow ();
-}
+// h1 {
+//   background-color: @xtxColor;
+//   .hoverShadow ();
+// }
 </style>

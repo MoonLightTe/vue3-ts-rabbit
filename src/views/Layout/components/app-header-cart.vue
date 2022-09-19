@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import useStore from '@/store';
 const { cart } = useStore();
-// 获取购物车列表
-cart.getCartList();
+
+if(cart.isLogin){
+  // 获取购物车列表
+  cart.getCartList();
+}
 const del = (skuId: string) => {
   cart.delCart({ ids: [skuId] });
 };

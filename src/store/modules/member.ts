@@ -5,6 +5,7 @@ import type { Profile } from '@/type/modules/member';
 import { message } from '@/components';
 // 导入路由实例
 import router from '@/router/index'
+import useStore from '..';
 
 const useMemberStore = defineStore('member', {
   // 开启数据持久化
@@ -39,8 +40,10 @@ const useMemberStore = defineStore('member', {
       this.profile={} as Profile;
       // 2.提示用户
       message({type:'success',text:'退出成功'})
-      //
       router.push('/login')
+      // 退出登录
+      const {cart}= useStore();
+      cart.clearCart() // 清空购物车
     },
     // 三方登录——账号绑定
     async loginSocialBind(data:{unionId:string,mobile:string,code:string}){

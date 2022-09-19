@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router';
 import { getGoodsDetaile } from '@/api/goods';
 import { onMounted, ref } from 'vue';
-import type { Goods, SkuEmit } from '@/type';
+import type { Goods, SkuEmit,CartItem } from '@/type';
 import useStore from '@/store';
 import { message } from '@/components';
 const route = useRoute();
@@ -19,20 +19,47 @@ const count =ref(1)
 const skuId=ref('')
 const change= (value:SkuEmit)=>{
   skuId.value =value.skuId || ''
-  console.log(value)
 }
+// 选中的商品规格文本
+const attrsText = ref("");
 // 点击按钮添加到购物车
 const {cart} = useStore();
 const add=()=>{
-  console.log('1');
   if(!skuId.value){
     message({type:"error",text:"请选择完成商品规则"})
   }
+  if(!goods.value) return
   // 调用加入的购物车接口
-  cart.addCart({
+  if(cart.isLogin){
+    cart.addCart({
     skuId:skuId.value,
     count:count.value
   })
+  }else{
+    const cartItem = {
+    // 第一部分：商品详情中有的
+    id: goods.value.id, // 商品id
+    name: goods.value.name, // 商品名称
+    picture: goods.value.mainPictures[0], // 图片
+    price: goods.value.oldPrice, // 旧价格
+    nowPrice: goods.value.price, // 新价格
+    stock: goods.value.inventory, // 库存
+    // 第二部分：商品详情中没有的，自己通过响应式数据收集
+    count: count.value, // 商品数量
+    skuId: skuId.value, // skuId
+    attrsText: attrsText.value, // 商品规格文本
+    // 第三部分：设置默认值即可
+    selected: true, // 默认商品选中
+    isEffective: true, // 默认商品有效
+  } as CartItem;  // 📌 as 断言防止类型报错
+
+  console.log('📌cartItem 数据终于准备完毕了', cartItem);
+
+  // 调用加入购物车接口
+  cart.addCart(cartItem);
+
+  }
+
 }
 
 </script>
