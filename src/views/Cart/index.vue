@@ -54,7 +54,7 @@ const { cart } = useStore();
               <td class="tc"><p class="f16 red">&yen;{{(Number(item.nowPrice) * item.count).toFixed(2)}}</p></td>
               <td class="tc">
                 <p><a href="javascript:;">移入收藏夹</a></p>
-                <p><a class="green" href="javascript:;">删除</a></p>
+                <p><a class="green" href="javascript:;" @click="cart.delCart({ids:[item.skuId]})">删除</a></p>
                 <p><a href="javascript:;">找相似</a></p>
               </td>
             </tr>
