@@ -28,7 +28,7 @@ const { cart } = useStore();
           <!-- 有效商品 -->
           <tbody>
             <tr v-for="item in cart.effectiveList" :key="item.skuId">
-              <td><XtxCheckBox :model-value="item.selected" v-on:update:model-value="(newVal)=>cart.updateCart(item.skuId,{selected:newVal})" /></td>
+              <td><XtxCheckBox :model-value="item.selected" @update:model-value="(newVal)=>cart.updateCart(item.skuId,{selected:newVal})" /></td>
               <td>
                 <div class="goods">
                   <RouterLink :to="`/goods/${item.id}`">

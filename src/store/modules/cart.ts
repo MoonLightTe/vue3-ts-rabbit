@@ -105,9 +105,14 @@ const userCartStore = defineStore('cart', {
     },
     // 删除购物车数据
     async delCart(data: { ids: string[] }) {
-      const res = await deleteCart(data);
-      console.log('删除购物车列表 ', res);
-      this.getCartList();
+      if(this.isLogin){
+        // 删除此条数据
+        await deleteCart(data);
+        this.getCartList();
+      }else{
+        this.cartList=this.cartList.filter(item=>item.skuId !== data.ids[0])
+      }
+      message({type:"error",text:'删除成功'})
     },
     /**
      * 更新购物车的选中和数量
@@ -116,10 +121,25 @@ const userCartStore = defineStore('cart', {
       skuId: string,
       data?: { selected?: boolean; count?: number }
     ) {
-      const res = await updateCart(skuId, data);
-      console.log('res : ', res);
+
+      if(this.isLogin){
+     await updateCart(skuId, data);
       // 获取最新的购物车列表
       this.getCartList();
+      }else{
+      const cartItem= this.cartList.find(item=>item.skuId === skuId) as CartItem;
+        if(data?.count){
+          cartItem.count=data.count
+        }
+
+        if(data?.selected !== undefined){
+          console.log('data?.selected: ', data?.selected);
+          console.log('222',cartItem);
+          cartItem.selected=data.selected
+        }
+
+      }
+
     },
     /**
      *更改全选按钮的状态
