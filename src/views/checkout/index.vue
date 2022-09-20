@@ -12,7 +12,7 @@
           <XtxBreadItem to="/cart">购物车</XtxBreadItem>
           <XtxBreadItem>填写订单</XtxBreadItem>
         </XtxBread>
-        <div class="wrapper">
+        <div v-if="checkout.checkoutInfo?.goods" class="wrapper">
           <!-- 收货地址 -->
           <h3 class="box-title">收货地址</h3>
           <div class="box-body">
@@ -112,6 +112,7 @@
             <XtxButton type="primary">提交订单</XtxButton>
           </div>
         </div>
+        <div v-else class="wrapper loading"></div>
       </div>
     </div>
   </template>
@@ -130,6 +131,10 @@
     .box-body {
       padding: 20px 0;
     }
+  }
+  .loading{
+    min-height: 500px;
+    background: #fff url("@/assets/images/loading.gif") no-repeat center;
   }
   .address {
     border: 1px solid #f5f5f5;
