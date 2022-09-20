@@ -1,15 +1,20 @@
 <script setup lang="ts">
 import type { CheckoutInfo } from '@/type';
+import { ref,} from 'vue';
 
 const emit = defineEmits<{
   (event: 'update:visible', value: boolean): void;
+  (event: 'update:index', value: number): void;
 }>();
-defineProps<{
+const props= defineProps<{
   visible: boolean;
   checkoutInfo:CheckoutInfo
-}>();
+  index:number
+}>()
+const temp = ref(props.index)
 const verifyBtn = () => {
-
+  emit('update:index',temp.value)
+  emit('update:visible', false);
 };
 const cancelBtn = () => {
   emit('update:visible', false);
@@ -18,10 +23,10 @@ const cancelBtn = () => {
 
 <template>
    <!--
-+    fixed 定位 会被祖先元素的 transform、perspective、filter 影响
-+    祖先元素 transform、perspective、filter 不为 none的时候
-+    fixed定位的参照物会是该祖先元素
-+   -->
+   fixed 定位 会被祖先元素的 transform、perspective、filter 影响
+    祖先元素 transform、perspective、filter 不为 none的时候
+    fixed定位的参照物会是该祖先元素
+   -->
  <!-- <div style="transform: translate(0)"> -->
   <Teleport to="#modul">
   <XtxDialog title="切换收货地址" :visible="visible" @close="cancelBtn">
@@ -31,6 +36,8 @@ const cancelBtn = () => {
               class="text item"
               v-for="(item, i) in checkoutInfo?.userAddresses"
               :key="item.id"
+              :class="{ active: temp === i }"
+              @click="temp = i"
             >
             <ul>
               <li><span>收&emsp;货&emsp;人：</span>{{ item.receiver }}</li>

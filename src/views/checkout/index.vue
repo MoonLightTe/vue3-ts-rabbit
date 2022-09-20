@@ -9,7 +9,7 @@ checkout.getCheckoutInfo(); // 进入页面 获取订单信息
 // 订单结算页 --- 收货地址渲染
 const { checkoutInfo } = storeToRefs(checkout); // 将仓库里的数据解构出来还保持响应式
 // 声明一个下标
-const index= ref(2)
+const index= ref(0)
 const currentAddress=computed(()=>{
   return checkoutInfo.value?.userAddresses[index.value] || {}
 })
@@ -134,7 +134,7 @@ const toggleMenu=()=>{
       <div v-else class="wrapper loading"></div>
     </div>
   </div>
-  <ToggleAddress v-model:visible="visible" :checkout-info="checkoutInfo" />
+  <ToggleAddress v-model:visible="visible" :checkout-info="checkoutInfo" v-model:index="index" />
 </template>
 
 <style scoped lang="less">
