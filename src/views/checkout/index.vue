@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import useStore from '@/store/index.js';
   const { checkout } = useStore();
-  checkout.getCheckoutInfo()
+  checkout.getCheckoutInfo() // 进入页面 获取订单信息
   </script>
 
   <template>
@@ -91,19 +91,19 @@
             <div class="total">
               <dl>
                 <dt>商品件数：</dt>
-                <dd>5件</dd>
+                <dd>{{checkout.checkoutInfo.summary.goodsCount}}</dd>
               </dl>
               <dl>
                 <dt>商品总价：</dt>
-                <dd>¥5697.00</dd>
+                <dd>¥{{checkout.checkoutInfo.summary.totalPrice}}</dd>
               </dl>
               <dl>
                 <dt>运<i></i>费：</dt>
-                <dd>¥0.00</dd>
+                <dd>¥{{checkout.checkoutInfo.summary.postFee}}</dd>
               </dl>
               <dl>
                 <dt>应付总额：</dt>
-                <dd class="price">¥5697.00</dd>
+                <dd class="price">¥{{checkout.checkoutInfo.summary.totalPrice}}</dd>
               </dl>
             </div>
           </div>
