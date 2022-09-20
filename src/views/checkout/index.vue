@@ -134,7 +134,7 @@ const toggleMenu=()=>{
       <div v-else class="wrapper loading"></div>
     </div>
   </div>
-  <ToggleAddress v-model:visible="visible" />
+  <ToggleAddress v-model:visible="visible" :checkout-info="checkoutInfo" />
 </template>
 
 <style scoped lang="less">

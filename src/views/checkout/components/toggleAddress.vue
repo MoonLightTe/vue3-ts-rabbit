@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import type { CheckoutInfo } from '@/type';
+
 const emit = defineEmits<{
   (event: 'update:visible', value: boolean): void;
 }>();
 defineProps<{
   visible: boolean;
+  checkoutInfo:CheckoutInfo
 }>();
 const verifyBtn = () => {
 
@@ -23,7 +26,21 @@ const cancelBtn = () => {
   <Teleport to="#modul">
   <XtxDialog title="切换收货地址" :visible="visible" @close="cancelBtn">
     <template #default>
-      <h1>对话框内容</h1>
+      <div class="addressWrapper">
+            <div
+              class="text item"
+              v-for="(item, i) in checkoutInfo?.userAddresses"
+              :key="item.id"
+            >
+            <ul>
+              <li><span>收&emsp;货&emsp;人：</span>{{ item.receiver }}</li>
+              <li><span>联系方式：</span>{{ item.contact }}</li>
+              <li>
+                <span>收货地址：</span>{{ item.fullLocation + item.address }}
+              </li>
+            </ul>
+          </div>
+        </div>
     </template>
     <template #footer>
       <XtxButton type="gray" style="margin-right: 20px" @click="cancelBtn">
@@ -36,4 +53,50 @@ const cancelBtn = () => {
   <!-- </div> -->
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+  .xtx-dialog {
+  .addressWrapper {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  .text {
+    flex: 1;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    &.item {
+      border: 1px solid #f5f5f5;
+      margin-bottom: 10px;
+      cursor: pointer;
+      &.active,
+      &:hover {
+        border-color: @xtxColor;
+        background: lighten(@xtxColor, 50%);
+      }
+      > ul {
+        padding: 10px;
+        font-size: 14px;
+        line-height: 30px;
+      }
+    }
+  }
+}
+// common.less
+*::-webkit-scrollbar {
+    width: 5px;
+    // height: 10px; // 高度写不写，都不影响，因为会根据内容的长度自动计算
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #ccc; // 滑块颜色
+    border-radius: 5px; // 滑块圆角
+}
+
+// 兼容Firefox、IE
+* {
+    scrollbar-width: 10px;
+    scrollbar-base-color: green;
+    scrollbar-track-color: red;
+    scrollbar-arrow-color: blue;
+}
+</style>
