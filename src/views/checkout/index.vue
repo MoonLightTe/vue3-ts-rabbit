@@ -2,12 +2,13 @@
 import useStore from '@/store/index.js';
 import { storeToRefs } from 'pinia';
 import {ref,computed} from 'vue'
+import { hideContact } from '@/utils';
 const { checkout } = useStore();
 checkout.getCheckoutInfo(); // 进入页面 获取订单信息
 // 订单结算页 --- 收货地址渲染
 const { checkoutInfo } = storeToRefs(checkout); // 将仓库里的数据解构出来还保持响应式
 // 声明一个下标
-const index= ref(0)
+const index= ref(2)
 const currentAddress=computed(()=>{
   return checkoutInfo.value?.userAddresses[index.value] || {}
 })
@@ -29,7 +30,7 @@ const currentAddress=computed(()=>{
             <div class="text">
               <ul v-if="checkout.checkoutInfo.userAddresses.length">
                 <li><span>收&ensp;货&ensp;人：</span>{{currentAddress.receiver}}</li>
-                <li><span>联系方式：</span>{{currentAddress.contact}}</li>
+                <li><span>联系方式：</span>{{ hideContact(currentAddress.contact) }}</li>
                 <li>
                   <span>收货地址：</span>{{currentAddress.address}}
                 </li>
