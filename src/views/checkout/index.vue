@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useStore from '@/store/index.js';
+import ToggleAddress from './components/toggleAddress.vue';
 import { storeToRefs } from 'pinia';
 import {ref,computed} from 'vue'
 import { hideContact } from '@/utils';
@@ -12,6 +13,12 @@ const index= ref(2)
 const currentAddress=computed(()=>{
   return checkoutInfo.value?.userAddresses[index.value] || {}
 })
+
+// 切换地址
+const visible=ref(false)
+const toggleMenu=()=>{
+  visible.value=true
+}
 </script>
 
 <template>
@@ -38,7 +45,7 @@ const currentAddress=computed(()=>{
               <div class="none" v-else>您需要先添加收货地址才可提交订单</div>
             </div>
             <div class="action">
-              <XtxButton class="btn">切换地址</XtxButton>
+              <XtxButton class="btn" @click="toggleMenu">切换地址</XtxButton>
               <XtxButton class="btn">添加地址</XtxButton>
             </div>
           </div>
@@ -127,6 +134,7 @@ const currentAddress=computed(()=>{
       <div v-else class="wrapper loading"></div>
     </div>
   </div>
+  <ToggleAddress v-model:visible="visible" />
 </template>
 
 <style scoped lang="less">
