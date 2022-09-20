@@ -47,24 +47,24 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in 4" :key="item">
+                <tr v-for="item in checkout.checkoutInfo?.goods" :key="item.skuId">
                   <td>
-                    <a href="javascript:;" class="info">
+                    <RouterLink  :to="`/goods/${item.id}`" class="info">
                       <img
-                        src="https://yanxuan-item.nosdn.127.net/cd9b2550cde8bdf98c9d083d807474ce.png"
+                        :src="item.picture"
                         alt=""
                       />
                       <div class="right">
-                        <p>轻巧多用锅雪平锅 麦饭石不粘小奶锅煮锅</p>
-                        <p>颜色：白色 尺寸：10cm 产地：日本</p>
+                        <p>{{item.name}}</p>
+                        <p>{{item.attrsText}}</p>
                       </div>
-                    </a>
+                    </RouterLink>
                   </td>
                   <!--  顺序：实付单价，数量，小计总价，实付价格小计 -->
-                  <td>&yen;100.00</td>
-                  <td>2</td>
-                  <td>&yen;200.00</td>
-                  <td>&yen;200.00</td>
+                  <td>&yen;{{item.payPrice}}</td>
+                  <td>{{item.count}}</td>
+                  <td>&yen;{{item.totalPrice}}</td>
+                  <td>&yen;{{item.totalPayPrice}}</td>
                 </tr>
               </tbody>
             </table>

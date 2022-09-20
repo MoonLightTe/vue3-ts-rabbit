@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import {createOrder} from '@/api/checkout'
+import type { CheckoutInfo } from "@/type";
 
 
 const useCheckoutStore=defineStore('checkout',{
   // state 相当于data
   state:()=>({
-    checkoutInfo:{}
+    checkoutInfo:{} as CheckoutInfo
   }),
   // getters 相当于computed
   getters:{},
@@ -13,7 +14,7 @@ const useCheckoutStore=defineStore('checkout',{
   actions:{
   async  getCheckoutInfo(){
      const res =await createOrder()
-     console.log('res: ', res);
+     this.checkoutInfo=res.data.result
     }
   }
 })
