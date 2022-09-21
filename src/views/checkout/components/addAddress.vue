@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue';
+import { ref } from 'vue';
+import { requestAddress, reqFindAddAddress } from '@/api/order';
+import { message } from '@/components';
+import useStore from '@/store';
+import { storeToRefs } from 'pinia';
 //  准备控制弹框展示的响应式数据
 const props = defineProps<{
   addVisible: boolean;
@@ -7,9 +11,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'update:addVisible', isShow: boolean): void;
 }>();
-const appendNewAddress = () => {
-  emit('update:addVisible', false);
-};
 // 表单数据
 let formData = ref({
   receiver: '',
@@ -46,6 +47,8 @@ interface ChangeResult {
   countyCode: string;
   countyName: string;
 }
+const { checkout } = useStore();
+const { checkoutInfo } = storeToRefs(checkout);
 // 选择地区
 const changeCty = (data: ChangeResult) => {
   formData.value.provinceCode = data.provinceCode;
@@ -53,8 +56,14 @@ const changeCty = (data: ChangeResult) => {
   formData.value.countyCode = data.countyCode;
   // formData.fullLocation = data.fullLocation
 };
-const submitForm = () => {
-  formData.value.receiver = '我变了';
+const submitForm = async () => {
+  const res = await requestAddress(formData.value);
+  if (res.data.code === '1') {
+    message({ type: 'success', text: '新增地址成功' });
+    emit('update:addVisible', false);
+    const addressList = await reqFindAddAddress();
+    checkoutInfo.value.userAddresses = addressList.data.result;
+  }
 };
 </script>
 
@@ -128,8 +137,6 @@ const submitForm = () => {
       <XtxButton type="primary" @click="submitForm">确认</XtxButton>
     </template>
   </XtxDialog>
-  <!-- 点击按钮打开弹框 -->
-  <XtxButton class="btn" @click="appendNewAddress">添加地址</XtxButton>
 </template>
 
 <style scoped lang="less">
