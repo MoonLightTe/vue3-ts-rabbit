@@ -10,6 +10,12 @@ checkout.getOrderDetail(route.query.orderId as string)
 const {orderDetail} =storeToRefs(checkout)
 const {count,start}=userCount()
 start(checkout.orderDetail?.countdown || 1)
+// 后端支付链接格式组成：(后端要求)
+// const payUrl = '后台服务基准地址+支付接口地址+订单ID+回跳地址'
+const baseURL = "http://pcapi-xiaotuxian-front-devtest.itheima.net/"
+// 支付宝的回跳地址不识别特殊符号，需要主动转码处理 encodeURIComponent
+const target = encodeURIComponent('http://www.corho.com:8080/#/member/pay/callback')
+const payUrl = `${baseURL}pay/aliPay?orderId=${route.query.orderId}&redirect=${target}`
 </script>
 
 <template>
@@ -38,7 +44,7 @@ start(checkout.orderDetail?.countdown || 1)
         <div class="item">
           <p>支付平台</p>
           <a class="btn wx" href="javascript:;"></a>
-          <a class="btn alipay" href="javascript:;"></a>
+          <a class="btn alipay" :href="payUrl"></a>
         </div>
         <div class="item">
           <p>支付方式</p>
