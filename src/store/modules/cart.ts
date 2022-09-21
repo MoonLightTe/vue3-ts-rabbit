@@ -113,7 +113,6 @@ const userCartStore = defineStore('cart', {
      */
     async getCartList() {
       const res = await getCartList();
-      console.log('购物车列表 : ', res);
       this.cartList = res.data.result;
     },
     // 删除购物车数据

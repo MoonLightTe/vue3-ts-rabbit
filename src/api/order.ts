@@ -1,5 +1,5 @@
 import request from "@/utils/request";
- import type {Address,SubOrder} from '@/type'
+ import type {Address,SubOrder,SubmitCheckout} from '@/type'
  type Res<T> = {
   code: string;
   msg: string;
@@ -21,7 +21,7 @@ export const reqFindAddAddress =()=>{
  * @param data
  */
 export const submitOrder=(data:SubOrder)=>{
-  return request.post('/member/order',data)
+  return request.post<Res<SubmitCheckout>>('/member/order',data)
 }
 
 

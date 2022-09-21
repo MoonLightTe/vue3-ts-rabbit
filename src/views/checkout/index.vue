@@ -52,9 +52,13 @@ const data:SubOrder ={
   deliveryTimeType:1,
 }
 // 调用接口 将订单信息传给后台
-  await submitOrder(data)
+ const res =  await submitOrder(data)
 // 跳转页面
-router.push('/member/pay')
+// push 推入可以上一个页面
+// replace 替换，直接替换上一个页面
+router.replace('/member/pay?orderId=' + res.data.result.id)
+const { cart } = useStore();
+cart.getCartList()
 }
 </script>
 

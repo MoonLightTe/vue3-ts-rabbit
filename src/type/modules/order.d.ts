@@ -25,5 +25,21 @@ export interface SubOrder{
   buyerMessage:string;
 }
 
+// 提交订单返回的数据
+export interface SubmitCheckout {
+  id: string;
+  createTime: string;
+  payType: number;
+  orderState: number;
+  payLatestTime: string;
+  postFee: number;
+  payMoney: number;
+  totalMoney: number;
+  totalNum: number;
+  // skus?: any;
+  payChannel: number;
+  // countdown?: any;
+}
+
 
 
