@@ -21,7 +21,8 @@ const router = createRouter({
         },
         { path: '/cart', component: () => import('@/views/Cart/index.vue') },
         {path:"/member/checkout",component:()=>import('@/views/checkout/index.vue')},
-        {path:"/member/pay",component:()=>import('@/views/pay/index.vue')}
+        {path:"/member/pay",component:()=>import('@/views/pay/index.vue')},
+        {path:"/member/pay/callback",component:()=>import('@/views/pay/callback.vue')}
       ],
     },
     { path: '/login', component: () => import('@/views/Login/index.vue') },
