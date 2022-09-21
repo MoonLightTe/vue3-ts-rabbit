@@ -1,16 +1,5 @@
 import request from "@/utils/request";
- interface Address {
-  receiver:string,
-  contact: string,
-  provinceCode: string,
-  cityCode: string,
-  countyCode: string,
-  address: string,
-  postalCode: string,
-  addressTags: string,
-  isDefault: number,
-  fullLocation: string,
- }
+ import type {Address,SubOrder} from '@/type'
  type Res<T> = {
   code: string;
   msg: string;
@@ -26,6 +15,13 @@ export const requestAddress=(address:Address)=>request.post<Res<any>>('/member/a
  */
 export const reqFindAddAddress =()=>{
   return request.get<Res<any>>('/member/address')
+}
+/**
+ * 提交订单信息
+ * @param data
+ */
+export const submitOrder=(data:SubOrder)=>{
+  return request.post('/member/order',data)
 }
 
 
