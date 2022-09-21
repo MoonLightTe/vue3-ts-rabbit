@@ -56,6 +56,7 @@ const changeCty = (data: ChangeResult) => {
   formData.value.countyCode = data.countyCode;
   // formData.fullLocation = data.fullLocation
 };
+// 提交新增地址表单成功
 const submitForm = async () => {
   const res = await requestAddress(formData.value);
   if (res.data.code === '1') {
