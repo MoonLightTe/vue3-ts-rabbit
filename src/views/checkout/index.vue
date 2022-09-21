@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import useStore from '@/store/index.js';
+// 切换地址组件
 import ToggleAddress from './components/toggleAddress.vue';
+// 新增地址组件
+import addAddress from './components/addAddress.vue'
 import { storeToRefs } from 'pinia';
 import {ref,computed} from 'vue'
 import { hideContact } from '@/utils';
@@ -18,6 +21,13 @@ const currentAddress=computed(()=>{
 const visible=ref(false)
 const toggleMenu=()=>{
   visible.value=true
+}
+
+// 新增地址
+const addVisible=ref(false)
+const addNewAddress=()=>{
+  console.log(11111);
+  addVisible.value=true
 }
 </script>
 
@@ -46,7 +56,7 @@ const toggleMenu=()=>{
             </div>
             <div class="action">
               <XtxButton class="btn" @click="toggleMenu">切换地址</XtxButton>
-              <XtxButton class="btn">添加地址</XtxButton>
+              <XtxButton class="btn" @click="addNewAddress">添加地址</XtxButton>
             </div>
           </div>
         </div>
@@ -135,6 +145,7 @@ const toggleMenu=()=>{
     </div>
   </div>
   <ToggleAddress v-model:visible="visible" :checkout-info="checkoutInfo" v-model:index="index" />
+  <addAddress v-model:addVisible="addVisible"></addAddress>
 </template>
 
 <style scoped lang="less">
