@@ -7,6 +7,9 @@ import addAddress from './components/addAddress.vue'
 import { storeToRefs } from 'pinia';
 import {ref,computed} from 'vue'
 import { hideContact } from '@/utils';
+import { message } from '@/components';
+import type { SubOrder } from '@/type';
+import {submitOrder} from '@/api/order'
 const { checkout } = useStore();
 checkout.getCheckoutInfo(); // 进入页面 获取订单信息
 // 订单结算页 --- 收货地址渲染
@@ -28,6 +31,30 @@ const addVisible=ref(false)
 const addNewAddress=()=>{
   console.log(11111);
   addVisible.value=true
+}
+
+// 提交订单
+const submitCheckout= async()=>{
+// 判断用户选择的地址
+if(!currentAddress.value?.id){
+return message({type:'warn',text:"请选择收货地址"})
+}
+const data:SubOrder ={
+  goods:checkout.checkoutInfo.goods.map(({skuId,count})=>({
+    skuId,
+    count
+  })),
+  addressId:currentAddress.value.id,
+  payType:1,
+  payChannel:1,
+  buyerMessage:"买家留言",
+  deliveryTimeType:1,
+}
+// 调用接口 将订单信息传给后台
+  const res =await submitOrder(data)
+ 
+
+
 }
 </script>
 
@@ -138,7 +165,7 @@ const addNewAddress=()=>{
         </div>
         <!-- 提交订单 -->
         <div class="submit">
-          <XtxButton type="primary">提交订单</XtxButton>
+          <XtxButton type="primary" @click="submitCheckout">提交订单</XtxButton>
         </div>
       </div>
       <div v-else class="wrapper loading"></div>
