@@ -10,6 +10,7 @@ import { hideContact } from '@/utils';
 import { message } from '@/components';
 import type { SubOrder } from '@/type';
 import {submitOrder} from '@/api/order'
+import router  from '@/router';
 const { checkout } = useStore();
 checkout.getCheckoutInfo(); // 进入页面 获取订单信息
 // 订单结算页 --- 收货地址渲染
@@ -51,10 +52,9 @@ const data:SubOrder ={
   deliveryTimeType:1,
 }
 // 调用接口 将订单信息传给后台
-  const res =await submitOrder(data)
- 
-
-
+  await submitOrder(data)
+// 跳转页面
+router.push('/member/pay')
 }
 </script>
 
